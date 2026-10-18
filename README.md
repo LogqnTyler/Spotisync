@@ -8,10 +8,8 @@ database, frontend build, or cloud service is required.
 
 **Spotify account safety:** This project is unofficial and uses Zotify/librespot.
 Spotify may rate-limit requests, invalidate sessions, change APIs, or suspend
-accounts. Successful installation or a healthy web server alone does not verify
-Spotify access; availability can vary by account, region, and upstream changes.
-Do not assume flawless operation or account safety. Use only content you have
-permission to download and comply with applicable law and Spotify's terms.
+accounts. Use only content you have permission to download and comply with applicable 
+law and Spotify's terms.
 
 ## Docker Setup
 
@@ -38,7 +36,7 @@ Exported shell variables take precedence over `.env` values.
 
 To use another music directory, set `MUSIC_DIR` in `.env` to an **absolute** host
 path, for example `MUSIC_DIR=/home/logan/Audio`, and create that directory with
-`mkdir -p "/home/logan/Audio"` first. Unset or empty `MUSIC_DIR` defaults to
+`mkdir -p "/home/YourUsername/Audio"` first. Unset or empty `MUSIC_DIR` defaults to
 `${HOME}/Music`, using the host's `HOME`, not the container's. Avoid `~` in `.env`
 paths. The existing folder must be writable by the chosen UID/GID. If it does not
 exist, Docker's bind mount can create a root-owned folder and the non-root app
