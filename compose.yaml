@@ -1,0 +1,38 @@
+services:
+  spotisync:
+    build:
+      context: .
+      args:
+        PUID: "${PUID:-1000}"
+        PGID: "${PGID:-1000}"
+    environment:
+      SPOTISYNC_STATE_DIR: /data
+      SPOTISYNC_MUSIC_DIR: /music
+      SPOTISYNC_OAUTH_BIND: 0.0.0.0
+    ports:
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:4381:4381"
+    volumes:
+      - app-state:/data
+      - "${MUSIC_DIR:-${HOME}/Music}:/music:rw"
+      - /etc/localtime:/etc/localtime:ro
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3).close()"
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+
+volumes:
+  app-state:

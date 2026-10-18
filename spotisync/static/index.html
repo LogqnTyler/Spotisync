@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="only light">
+    <meta name="darkreader-lock">
+    <meta name="theme-color" content="#ffffff">
+    <title>SpotiSync | Your music, kept close</title>
+    <link rel="stylesheet" href="/static/style.css?v=offline-progress-header-1">
+    <script src="/static/app.js?v=offline-progress-header-1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#library">Skip to library</a>
+    <div class="shell">
+      <header class="masthead">
+        <a class="brand" href="/" aria-label="SpotiSync home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>Spoti<span class="brand-light">Sync</span></span>
+        </a>
+        <section class="account-panel" aria-labelledby="account-title">
+          <div class="account-copy">
+            <div class="section-kicker" id="account-title">Spotify account</div>
+            <p id="account-status">Checking connection...</p>
+            <p id="account-message" class="muted" hidden></p>
+            <a id="auth-link" class="text-link" target="_blank" rel="noopener noreferrer" hidden>Open Spotify authorization</a>
+            <p id="auth-help" class="muted" role="status" hidden></p>
+          </div>
+          <div class="account-actions">
+            <button id="connect-button" class="button button-secondary" type="button" disabled>Connect Spotify</button>
+            <button id="disconnect-button" class="button button-quiet" type="button" hidden>Disconnect</button>
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="intro-title">
+          <h1 id="intro-title">Track Spotify playlists, albums, and tracks in one place.</h1>
+          <form id="add-form" class="add-form" aria-describedby="add-help">
+            <label class="sr-only" for="source-uri">Spotify link or URI</label>
+            <div class="input-wrap">
+              <span class="input-symbol" aria-hidden="true">+</span>
+              <input id="source-uri" name="uri" type="text" placeholder="Paste a Spotify link or URI" autocomplete="off" autocapitalize="none" spellcheck="false" required disabled>
+              <button id="add-button" class="button button-primary" type="submit" disabled>Add source</button>
+            </div>
+            <p id="add-help" class="form-help">Adding a source only tracks it. Sync when you're ready to download.</p>
+            <p id="add-feedback" class="feedback" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <div id="api-error" class="notice notice-error" role="alert" hidden></div>
+
+        <p id="action-feedback" class="feedback action-feedback" role="status" aria-live="polite"></p>
+
+        <section class="library" id="library" aria-labelledby="library-title" tabindex="-1">
+          <div class="library-heading">
+            <div class="library-title-wrap"><p class="eyebrow">Collection</p><h2 id="library-title">Tracked sources <span id="source-count" class="source-count">0</span></h2></div>
+            <button id="sync-all-button" class="button button-primary" type="button" disabled>Sync all</button>
+          </div>
+          <div id="sync-panel" class="sync-panel" role="status" aria-live="polite" hidden>
+            <div class="sync-indicator" aria-hidden="true"></div>
+            <div class="sync-copy"><p id="sync-title"></p><p id="sync-detail" class="muted" hidden></p></div>
+            <div id="sync-progress" class="sync-progress" hidden>
+              <p id="sync-counter" class="sync-counter"></p>
+              <span id="sync-counter-label" class="sync-counter-label">new songs</span>
+            </div>
+          </div>
+          <div id="source-list" class="source-list"></div>
+          <div id="empty-state" class="empty-state">
+            <div class="empty-record" aria-hidden="true"><span></span></div>
+            <h3 id="empty-title">Loading your library</h3>
+            <p id="empty-copy">Checking tracked sources and your Spotify connection.</p>
+            <button id="empty-connect-button" class="button button-secondary" type="button" hidden>Connect Spotify</button>
+          </div>
+        </section>
+
+        <section class="preferences" aria-label="Download preferences and schedule">
+          <div class="format-preference">
+            <label class="section-kicker" for="format-select">Download format</label>
+            <div class="format-controls">
+              <select id="format-select" disabled>
+                <option value="ogg" selected>Native Ogg (default)</option>
+                <option value="mp3">MP3</option>
+                <option value="aac">AAC</option>
+              </select>
+              <button id="convert-button" class="button button-secondary" type="button" disabled>Convert existing songs</button>
+            </div>
+            <div class="quality-preference">
+              <label class="section-kicker" for="quality-select">Source quality</label>
+              <select id="quality-select" aria-describedby="quality-help" disabled>
+                <option value="auto" selected>Auto (best available)</option>
+                <option value="normal">Normal (96 kbps)</option>
+                <option value="high">High (160 kbps)</option>
+                <option value="very_high">Very high (320 kbps, Premium)</option>
+              </select>
+              <p id="quality-help" class="muted">Changing source quality updates existing songs on next sync. Higher quality may need a new download.</p>
+            </div>
+            <p class="muted">Converts successful downloads offline from .spotisync-originals. Missing originals or quality versions are skipped; use Sync to fetch them.</p>
+            <p id="conversion-status" class="feedback" role="status" aria-live="polite" hidden></p>
+            <details id="conversion-details" hidden>
+              <summary>Conversion details</summary>
+              <ul id="conversion-errors" class="error-list"></ul>
+            </details>
+          </div>
+          <div class="schedule-preference">
+            <div class="section-kicker">Daily schedule</div>
+            <p id="schedule-time">3:00 AM local time <span class="muted">/ retries through 8:00 AM</span></p>
+            <p id="schedule-zone" class="muted">Initial pass may continue past the retry cutoff.</p>
+            <p id="next-run" class="muted" hidden></p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <noscript><p class="notice">Enable JavaScript to connect Spotify and manage your library.</p></noscript>
+  </body>
+</html>

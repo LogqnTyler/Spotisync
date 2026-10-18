@@ -1,0 +1,15 @@
+# Only deployment inputs and application source belong in the build context.
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!spotisync/
+!spotisync/**
+**/__pycache__
+**/*.py[cod]
+**/.env
+**/.env.*
+**/credentials.json
+**/api_credentials.json
+**/*.db
+**/*.sqlite*

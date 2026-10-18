@@ -1,0 +1,20 @@
+[project]
+name = "spotisync"
+version = "0.1.0"
+description = "A local, scheduled Spotify library sync service powered by Zotify"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+    "zotify",
+]
+
+[dependency-groups]
+dev = ["httpx>=0.28,<1", "pytest>=8,<10", "pytest-asyncio>=1,<2"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.uv.sources]
+zotify = { git = "https://github.com/Googolplexed0/zotify.git", rev = "17919d9fbff2c7142023c39d803a071d794ce78b" }
