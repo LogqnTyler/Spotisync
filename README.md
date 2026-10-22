@@ -1,6 +1,6 @@
 # SpotiSync
 
-SpotiSync downloads and syncs your Spotify playlists to your computer. It uses (Googolplexed0)[https://github.com/Googolplexed0]'s fork of [Zotify](https://github.com/Googolplexed0/zotify) to download the Spotify tracks and a simple web UI with FastAPI to connect to your account and queue up playlists to sync.
+SpotiSync downloads and syncs your Spotify playlists to your computer. It uses [Googolplexed0](https://github.com/Googolplexed0)'s fork of [Zotify](https://github.com/Googolplexed0/zotify) to download the Spotify tracks and a simple web UI with FastAPI to connect to your account and queue up playlists to sync.
 
 ## Safety
 
