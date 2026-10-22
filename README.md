@@ -1,10 +1,10 @@
 # SpotiSync
 
-Local Spotify library sync using Python 3.13, uv, FastAPI, SQLite, Zotify, and a
-plain browser UI. One container runs the web app and scheduler; no separate
-database, frontend build, or cloud service is required.
+SpotiSync downloads and syncs your Spotify playlists to your computer. It uses (Googolplexed0)[https://github.com/Googolplexed0]'s fork of [Zotify](https://github.com/Googolplexed0/zotify) to download the Spotify tracks and a simple web UI with FastAPI to connect to your account and queue up playlists to sync.
 
 ## Safety
+
+**Important:** SpotiSync saves your Spotify credentials in the download destination folder (defaults to `${HOME}/Music`). These aren't encrypted. Be careful with them because they give full access to your Spotify account!
 
 **Spotify account safety:** This project is unofficial and uses Zotify/librespot.
 Spotify may rate-limit requests, invalidate sessions, change APIs, or suspend
